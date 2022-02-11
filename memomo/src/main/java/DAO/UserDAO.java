@@ -1,21 +1,23 @@
 package DAO;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
+import jakarta.annotation.Resource;
 import model.user;
 
 public class UserDAO {
 		
-	private DataSource datasource;
+	String databasename = "memo_mo";
+	String propaties = "?characterEncoding=UTF-8&severTimezone=JST";
+	String URL = "jdbc:mysql://localhost:3306/" + databasename + propaties;
 	
-	
-	private UserDAO(DataSource theDataSource) {
-		datasource = theDataSource;
-	}
+	String USER = "ta****";
+	String PASS = "******";
 	//login処理
 	public user login(user theUser) throws Exception {
 		
@@ -27,7 +29,10 @@ public class UserDAO {
 		ResultSet rs = null;
 	
 	try{	
-		Conn = datasource.getConnection();
+		
+		Class.forName("com.mysql.cj.jdbc.Driver");
+		
+		Conn = DriverManager.getConnection(URL , USER , PASS);
 		
 		//sql文の準備
 		String sql = "SELECT id, username, password FROM user WHERE username = ? AND password = ?";
@@ -49,7 +54,7 @@ public class UserDAO {
 			
 	      theAccount = new user(id, username, password);
 		} else {
-			throw new Exception("ユーザーが見つかりません");
+			return null;
 		}
 		return theAccount;
 			
@@ -74,8 +79,6 @@ public class UserDAO {
 		}
 		catch(Exception e){
 			e.printStackTrace();
-			
-			
 		}
 	}
 }
