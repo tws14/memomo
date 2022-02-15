@@ -1,5 +1,6 @@
 package servlet;
 
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -52,7 +53,7 @@ public class UserController extends HttpServlet {
 		Login loginlogic = new Login();
 		 result = loginlogic.execute(theAccount);
 	
-	if(result = true) {
+	if(result == true) {
 			gomainpage(request, response);
 		} else {
 		   relogin(request, response);
@@ -68,7 +69,9 @@ public class UserController extends HttpServlet {
 		
 		session.setAttribute("loginUser", theAccount);
 		
-		response.sendRedirect("/main.jsp");
+		RequestDispatcher d =
+				request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+		d.forward(request, response);
 		
 	}
 	private void relogin(HttpServletRequest request, HttpServletResponse response) 
@@ -79,6 +82,6 @@ public class UserController extends HttpServlet {
 		
 		session.setAttribute("status", "no user");
 		
-		response.sendRedirect("/login.jsp");
+		response.sendRedirect("/memomo/login.jsp");
 	}
 }
