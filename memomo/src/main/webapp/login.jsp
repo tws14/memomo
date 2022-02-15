@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="model.user" %>
+<%
+user theAccount = (user) session.getAttribute("loginUser");
+if(theAccount != null){%>
+	<jsp:forward page="/WEB-INF/jsp/main.jsp" />	
+<% } %>
  <%
 //セッションから取得
 String status = (String) session.getAttribute("status");

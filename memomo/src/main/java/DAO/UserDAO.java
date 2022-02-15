@@ -16,8 +16,8 @@ public class UserDAO {
 	String propaties = "?characterEncoding=UTF-8&severTimezone=JST";
 	String URL = "jdbc:mysql://localhost:3306/" + databasename + propaties;
 	
-	String USER = "ta******";
-	String PASS = "********";
+	String USER = "ta*****";
+	String PASS = "*********";
 	//login処理
 	public user login(user theUser) throws Exception {
 		
