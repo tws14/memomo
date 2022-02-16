@@ -8,5 +8,8 @@
 </head>
 <body>
 <h1>ログインユーザー:${loginUser.username}</h1>
+<form action="UserController" method="get"/>
+<input type="submit" value="ログアウト">
+</form>
 </body>
 </html>

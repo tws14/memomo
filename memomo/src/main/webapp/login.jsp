@@ -19,8 +19,10 @@ String status = (String) session.getAttribute("status");
 <body>
 <h1>ログイン</h1>
 
-<% if(status != null){%>
+<% if(status == "no user"){%>
 <p>ユーザー名かパスワードが間違っています</p>
+<% } else if (status == "logout"){ %>
+<p>ログアウトしました</p>
 <% } %>
 <form action="UserController" method="post"/>
 ユーザー名:<input type="text" name="username"><br/>

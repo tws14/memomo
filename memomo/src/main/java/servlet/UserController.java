@@ -31,8 +31,14 @@ public class UserController extends HttpServlet {
 		   throw new ServletException(e);
 	    }
 	}
+	//ログアウト機能
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
+		//セッションスコープ破棄
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		response.sendRedirect("/memomo/login.jsp");
 	}
 
 
