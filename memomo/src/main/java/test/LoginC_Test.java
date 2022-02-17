@@ -37,7 +37,6 @@ public class LoginC_Test {
 				System.out.println("失敗しました");
 			}
 		} catch (Exception e) {
-			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
 	}
@@ -55,8 +54,7 @@ public class LoginC_Test {
 			}else {
 				System.out.println("失敗しました");
 				}
-	} catch (Exception e) {
-				// TODO 自動生成された catch ブロック
+	      } catch (Exception e) {
 				e.printStackTrace();
 			}
 			

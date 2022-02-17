@@ -18,7 +18,9 @@ public class UserDAO {
 	
 	String USER = "ta*****";
 	String PASS = "*********";
-	//login処理
+	
+	
+	//login method
 	public user login(user theUser) throws Exception {
 		
 		user theAccount = null;
@@ -62,6 +64,78 @@ public class UserDAO {
 			close(Conn, Stmt, rs);
 			}
 		}
+	
+	
+	
+	//accountnamesearch method
+	 public boolean accountNameSearch(user theUser) throws Exception {
+		 
+		 user theAccount = null;
+			
+			//jdbcドライバ接続		
+			Connection Conn = null;
+			PreparedStatement Stmt = null;
+			ResultSet rs = null;
+		
+		try{	
+			
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			Conn = DriverManager.getConnection(URL , USER , PASS);
+			
+			//sql文の準備
+			String sql = "SELECT username FROM user WHERE username = ?";
+			
+			Stmt = Conn.prepareStatement(sql);
+			
+			Stmt.setString(1, theUser.getUsername());
+			
+			//実行
+			rs = Stmt.executeQuery();
+			
+			//ユーザーが一致した場合
+			//trueを戻す
+			if(rs.next()) {
+				return true;
+			} 
+				return false;
+				
+			} finally {
+				close(Conn, Stmt, rs);
+				}
+			}
+      
+	
+	//touroku method
+	 public void touroku(user theUser)  throws Exception {
+		 
+		 user theAccount = null;
+		 
+		 //jdbcドライバ接続		
+		 Connection Conn = null;
+		 PreparedStatement Stmt = null;
+		 
+	try{				
+		 Class.forName("com.mysql.cj.jdbc.Driver");
+				
+		 Conn = DriverManager.getConnection(URL , USER , PASS);
+				
+		 //sql文の準備
+		 String sql = "INSERT INTO user(username, password) VALUES(?, ?)";
+		 		
+	 	 Stmt = Conn.prepareStatement(sql);
+				
+		 Stmt.setString(1, theUser.getUsername());
+		 Stmt.setString(2, theUser.getPassword());
+				
+	 	 //実行
+        Stmt.execute();
+		  	 
+	   } finally {
+		   close(Conn, Stmt, null);
+	   }
+   }
+	
 	
 	
 	//クローズ処理
