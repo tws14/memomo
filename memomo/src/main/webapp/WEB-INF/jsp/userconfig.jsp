@@ -10,18 +10,19 @@ if(theAccount == null){%>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>memomo-main</title>
+<title>UserConfig</title>
 </head>
 <body>
 <h1>ログインユーザー:${loginUser.username}</h1>
-<form action="UserController" method="get">
-<input type="submit" value="ログアウト">
+<form action="UserConfig" method="post">
+<input type="hidden" name="command" value="DELETE" />
+<input type="submit" value="ユーザー削除" />
 </form>
 
 <br/>
-
 <form action="UserConfig" method="get" >
-<input type="submit" value="ユーザー設定">
+<input type="submit" value="メインページへ">
 </form>
+
 </body>
 </html>
