@@ -136,6 +136,34 @@ public class UserDAO {
 	   }
    }
 	
+	 //delete method
+    public void delete(user theUser)  throws Exception {
+		 
+		    user theAccount = null;
+		 
+		    //jdbcドライバ接続		
+		    Connection Conn = null;
+		    PreparedStatement Stmt = null;
+		 
+	try{				
+		    Class.forName("com.mysql.cj.jdbc.Driver");
+		  		
+		    Conn = DriverManager.getConnection(URL , USER , PASS);
+				
+		    //sql文の準備
+	    	 String sql = "DELETE FROM user WHERE username = ?";
+		 		
+	     	 Stmt = Conn.prepareStatement(sql);
+				
+	    	 Stmt.setString(1, theUser.getUsername());
+				
+	 	    //実行
+           Stmt.execute();
+		  	 
+	   } finally {
+		   close(Conn, Stmt, null);
+	   }
+   }
 	
 	
 	//クローズ処理
