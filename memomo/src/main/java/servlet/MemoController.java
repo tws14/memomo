@@ -52,11 +52,16 @@ public class MemoController extends HttpServlet {
 				case "LIST":
 					listMemos(request, response);
 					break;
+				case "MEMO":
+					writeMemo(request,response);
 			}
 		}  catch (Exception e) {
 				e.printStackTrace();
 	     }
 	}
+
+
+
 
 
 
@@ -85,6 +90,14 @@ public class MemoController extends HttpServlet {
 				
 				RequestDispatcher d =
 						request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+				d.forward(request, response);
+		
+	}
+
+	private void writeMemo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		
+				RequestDispatcher d =
+						request.getRequestDispatcher("/WEB-INF/jsp/memoform.jsp");
 				d.forward(request, response);
 		
 	}
