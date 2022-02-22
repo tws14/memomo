@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import model.AddMemo;
 import model.Memo;
 import model.user;
 
@@ -54,15 +55,15 @@ public class MemoController extends HttpServlet {
 					break;
 				case "MEMO":
 					writeMemo(request,response);
+					break;
+				case "ADD":
+					addMemo(request,response);
+					break;
 			}
 		}  catch (Exception e) {
 				e.printStackTrace();
 	     }
 	}
-
-
-
-
 
 
 
@@ -77,7 +78,8 @@ public class MemoController extends HttpServlet {
 	}
 	
 
-	private void listMemos(HttpServletRequest request, HttpServletResponse response) throws Exception  {
+	private void listMemos(HttpServletRequest request, HttpServletResponse response)
+			throws Exception  {
 		
 				HttpSession session = request.getSession();
 		
@@ -94,12 +96,50 @@ public class MemoController extends HttpServlet {
 		
 	}
 
-	private void writeMemo(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	private void writeMemo(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception {
 		
 				RequestDispatcher d =
 						request.getRequestDispatcher("/WEB-INF/jsp/memoform.jsp");
 				d.forward(request, response);
 		
 	}
+	
+	private void addMemo(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+				
+		       //リクエストパラメータ取得
+			   request.setCharacterEncoding("UTF-8");
+		      String daimei = request.getParameter("daimei");
+		      String honbun = request.getParameter("honbun");
+		      
+		      AddMemo am = new AddMemo();
+		      boolean result = am.addmemologic(daimei);
+		      
+		  if(result == true) {    
+		      //セッションからid取得
+		      HttpSession session = request.getSession();
+		      user loginUser = (user)session.getAttribute("loginUser");
+		      
+		      int id = loginUser.getId();
+		      
+		      Memo thememo = new Memo(id,daimei,honbun);
+		      
+		      memodao.add(thememo);
+		      
+		      listMemos(request, response);
+		      
+		  } else {
+			  
+			  HttpSession session = request.getSession();
+			  session.setAttribute("Dstatus", "not daimei");
+			  
+			  RequestDispatcher d =
+						request.getRequestDispatcher("/WEB-INF/jsp/memoform.jsp");
+				d.forward(request, response);
+		  }
+		      
+	}
+
 
 }
