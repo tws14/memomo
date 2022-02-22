@@ -46,7 +46,7 @@ public class MemoDAO {
 			
 			//ユーザーが一致した場合
 			//Memoを取得
-			if(rs.next()) {
+			while(rs.next()) {
 				int userid = rs.getInt("userid");
 				String daimei = rs.getString("daimei");
 				String honbun = rs.getString("honbun");
@@ -54,9 +54,6 @@ public class MemoDAO {
 				Memo tempmemo = new Memo(userid, daimei, honbun);
 				
 				Memos.add(tempmemo);
-				
-			} else {
-				   return null;
 			} 
 					return Memos;
 	    }  finally {

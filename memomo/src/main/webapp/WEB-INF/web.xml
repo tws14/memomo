@@ -9,24 +9,5 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
-  <servlet>
-    <description></description>
-    <display-name>UserTourokuController</display-name>
-    <servlet-name>UserTourokuController</servlet-name>
-    <servlet-class>servlet.UserTourokuController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>UserTourokuController</servlet-name>
-    <url-pattern>/UserTourokuController</url-pattern>
-  </servlet-mapping>
-  <servlet>
-    <description></description>
-    <display-name>MemoController</display-name>
-    <servlet-name>MemoController</servlet-name>
-    <servlet-class>servlet.MemoController</servlet-class>
-  </servlet>
-  <servlet-mapping>
-    <servlet-name>MemoController</servlet-name>
-    <url-pattern>/MemoController</url-pattern>
-  </servlet-mapping>
+
 </web-app>
