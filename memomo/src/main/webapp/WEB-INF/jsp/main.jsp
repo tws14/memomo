@@ -23,8 +23,13 @@ if(theAccount == null){%>
 
 <form action="UserConfig" method="get" >
 <input type="submit" value="ユーザー設定">
+</form>
+<br/>
 
-
+<form action="MemoController" method="get">
+<input type="hidden" name="MemoCommand" value="MEMO" />
+<button type="submit">メモる</button>
+</form>
 <br/><br/>
 
 	<table>
