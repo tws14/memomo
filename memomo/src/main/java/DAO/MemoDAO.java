@@ -61,6 +61,33 @@ public class MemoDAO {
 			}
 	}
 	
+	public void add(Memo thememo) throws Exception{
+		 
+		 //jdbcドライバ接続		
+		 Connection Conn = null;
+		 PreparedStatement Stmt = null;
+		 
+	try{				
+		 Class.forName("com.mysql.cj.jdbc.Driver");
+				
+		 Conn = DriverManager.getConnection(URL , USER , PASS);
+				
+		 //sql文の準備
+		 String sql = "INSERT INTO memo(userid, daimei, honbun) VALUES(?, ?, ?)";
+		 		
+	 	 Stmt = Conn.prepareStatement(sql);
+				
+		 Stmt.setInt(1, thememo.getUserid());
+		 Stmt.setString(2, thememo.getDaimei());
+		 Stmt.setString(3, thememo.getHonbun());		
+	 	 //実行
+       Stmt.execute();
+		  	 
+	   } finally {
+		   close(Conn, Stmt, null);
+	   }
+	}
+	
 	//クローズ処理
 	private void close(Connection Conn, PreparedStatement Stmt, ResultSet rs) {
 		try {
@@ -78,4 +105,6 @@ public class MemoDAO {
 			e.printStackTrace();
 		}
 	}
+
+
 }

@@ -70,7 +70,6 @@ public class UserDAO {
 	//accountnamesearch method
 	 public boolean accountNameSearch(user theUser) throws Exception {
 		 
-		 user theAccount = null;
 			
 			//jdbcドライバ接続		
 			Connection Conn = null;
@@ -109,7 +108,6 @@ public class UserDAO {
 	//touroku method
 	 public void touroku(user theUser)  throws Exception {
 		 
-		 user theAccount = null;
 		 
 		 //jdbcドライバ接続		
 		 Connection Conn = null;
@@ -139,7 +137,6 @@ public class UserDAO {
 	 //delete method
     public void delete(user theUser)  throws Exception {
 		 
-		    user theAccount = null;
 		 
 		    //jdbcドライバ接続		
 		    Connection Conn = null;
