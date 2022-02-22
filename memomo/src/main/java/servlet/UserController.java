@@ -76,7 +76,7 @@ public class UserController extends HttpServlet {
 		session.setAttribute("loginUser", theAccount);
 		
 		RequestDispatcher d =
-				request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
+				request.getRequestDispatcher("/MemoController");
 		d.forward(request, response);
 		
 	}
