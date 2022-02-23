@@ -39,8 +39,18 @@ if(theAccount == null){%>
 			
 			<c:forEach var="Memo" items="${MemoList}">
 			
+									<!-- 各メモへのリンク -->
+								
+						<c:url var="templink" value="MemoController">
+							<c:param name="MemoCommand" value="LOAD" />
+							<c:param name="userId" value="${Memo.userid}" />
+							<c:param name="Daimei" value="${Memo.daimei}" />
+							<c:param name="Honbun" value="${Memo.honbun}" />
+							<c:param name="memoId" value="${Memo.memoid}" />
+						</c:url>
+			
 			<tr>
-				<td>${Memo.daimei}</td>
+				<td>${Memo.daimei}    <a href="${templink}">メモ</a></td>
 			</tr>
 			
 			</c:forEach>

@@ -14,17 +14,18 @@ String status = (String) request.getAttribute("Dstatus");
 <h1>memomemo</h1>
 <br/>
 <% if(status == "not daimei"){%>
-<p>題名は入力してください</p>
+<p>題名は記入してください</p>
 <% } %>
 <br/>
 <form action="MemoController" method="get"/>
-<input type="hidden" name="MemoCommand" value="ADD" />
-メモ名:<input type="text" name="daimei"><br/>
+<input type="hidden" name="MemoCommand" value="UPDATE"/>
+<input type="hidden" name="memoid" value="${memoid}"/>
+メモ名:<input type="text" name="daimei" value="${daimei}"/><br/>
 <textarea name="honbun" rows="10" cols="40">
-本文を入力してください。
+${honbun}
 </textarea>	
 <br/>
-<button type="submit">メモる</button>
+<button type="submit">編集！</button>
 
 </form>
 <br/><br/>
