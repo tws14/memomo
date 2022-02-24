@@ -117,6 +117,59 @@ public class MemoDAO {
 	   }
 		
 	}
+	
+	public void delete(int mI) throws Exception {
+		
+		     //jdbcドライバ接続		
+	         Connection Conn = null;
+	         PreparedStatement Stmt = null;
+	  
+     try{				
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	  		
+	        Conn = DriverManager.getConnection(URL , USER , PASS);
+			
+	        //sql文の準備
+	        String sql = "DELETE FROM memo WHERE memoid = ?";
+	 		
+	        Stmt = Conn.prepareStatement(sql);
+			
+	        Stmt.setInt(1, mI);
+			
+	        //実行
+	        Stmt.execute();
+	  	 
+       } finally {
+	   close(Conn, Stmt, null);
+       }
+	}
+	
+	public void alldelete(int userid) throws Exception {
+		
+			//jdbcドライバ接続		
+        	Connection Conn = null;
+        	PreparedStatement Stmt = null;
+ 
+       try{				
+    	   
+    	   Class.forName("com.mysql.cj.jdbc.Driver");
+ 		
+    	   Conn = DriverManager.getConnection(URL , USER , PASS);
+		
+    	   //sql文の準備
+    	   String sql = "DELETE FROM memo WHERE userid = ?";
+		
+    	   Stmt = Conn.prepareStatement(sql);
+		
+    	   Stmt.setInt(1, userid);
+		
+    	   //実行
+    	   Stmt.execute();
+ 	 
+       } finally {
+    	   close(Conn, Stmt, null);
+       	}
+	}
 
 
 	

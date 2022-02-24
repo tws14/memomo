@@ -65,6 +65,8 @@ public class MemoController extends HttpServlet {
 				case "UPDATE":
 					updateMemo(request,response);
 					break;
+				case "DELETE":
+					deleteMemo(request,response);
 			}
 		}  catch (Exception e) {
 				e.printStackTrace();
@@ -76,13 +78,30 @@ public class MemoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
 		try {
-			listMemos(request, response);
+			
+			//パラメータ取得
+			String theCommand2 = (String) request.getAttribute("MainCommand");
+			
+			if(theCommand2 == null) {
+				theCommand2 = "LIST2";
+			}
+			
+			switch(theCommand2) {
+						case "LIST2":
+							   listMemos(request, response);
+							   break;
+						case "ALLDELETE":
+							    alldeleteMemos(request, response);
+							   break;
+			           }
 		} catch (Exception e) {
 			 e.printStackTrace();
 		}
 		
 	}
 	
+
+
 
 	private void listMemos(HttpServletRequest request, HttpServletResponse response)
 			throws Exception  {
@@ -101,6 +120,28 @@ public class MemoController extends HttpServlet {
 				d.forward(request, response);
 		
 	}
+	
+
+	private void alldeleteMemos(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+					HttpSession session = request.getSession();
+		
+					user tempUser = (user) session.getAttribute("loginUser");
+		
+					int userid = tempUser.getId();
+					
+					memodao.alldelete(userid);
+					
+					session.invalidate();
+					
+					RequestDispatcher d =
+							request.getRequestDispatcher("/WEB-INF/jsp/deleteend.jsp");
+					d.forward(request, response);
+		
+		
+	}
+
 
 	private void writeMemo(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
@@ -207,5 +248,17 @@ public class MemoController extends HttpServlet {
 		  }
 	}
 
+
+	private void deleteMemo(HttpServletRequest request, HttpServletResponse response) 
+	    throws Exception{
+		
+		//memoidパラメータ取得
+    	request.setCharacterEncoding("UTF-8");
+		int mI = Integer.parseInt(request.getParameter("memoId"));
+		
+		memodao.delete(mI);
+		
+		listMemos(request,response);
+	}
 
 }

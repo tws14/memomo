@@ -83,11 +83,10 @@ public class UserController extends HttpServlet {
 	private void relogin(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
 		
-		//セッションインスタンス取得
-		HttpSession session = request.getSession();
+	    request.setAttribute("status", "no user");
 		
-		session.setAttribute("status", "no user");
-		
-		response.sendRedirect("/memomo/login.jsp");
+		RequestDispatcher d =
+				request.getRequestDispatcher("/login.jsp");
+		d.forward(request, response);
 	}
 }

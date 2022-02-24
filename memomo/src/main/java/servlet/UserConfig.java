@@ -32,12 +32,14 @@ public class UserConfig extends HttpServlet {
 		   throw new ServletException(e);
 	    }
 	}
-	//ログアウト機能
+	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	
-		RequestDispatcher d =
-				request.getRequestDispatcher("/WEB-INF/jsp/configcheck.jsp");
-		d.forward(request, response);
+		
+		  //コンフィグチェックページへ
+		  RequestDispatcher d =
+					request.getRequestDispatcher("/WEB-INF/jsp/configcheck.jsp");
+			d.forward(request, response);
 
 	}
 
@@ -57,13 +59,13 @@ public class UserConfig extends HttpServlet {
 	     switch (theCommand) {
 	     	     case "BACK":
 	     	    	    backmain(request,response);
+	     	    	    break;
 	            case "CHECK":
 	            	    check(request,response);
 	            	    break;
 	            case "DELETE":
 	            		delete(request,response);
-	            default:
-						check(request,response);
+	            		break;
 	     }
        } catch(Exception e) {
     	   e.printStackTrace();
@@ -78,11 +80,11 @@ public class UserConfig extends HttpServlet {
 		user theAccount = (user) session.getAttribute("loginUser");
 		
 		userdao.delete(theAccount);
-		
-		session.invalidate();
+	
+		request.setAttribute("MainCommand", "ALLDELETE");
 		
 		RequestDispatcher d =
-				request.getRequestDispatcher("/WEB-INF/jsp/deleteend.jsp");
+				request.getRequestDispatcher("/MemoController");
 		d.forward(request, response);
 	}
 	
@@ -106,7 +108,7 @@ public class UserConfig extends HttpServlet {
 		result2 = (loginUser.getPassword().equals(password));
 		
 	
-	if(result1 || result2) {
+	if(result1 && result2) {
 			goconfigpage(request, response);
 		} else {
 		   back(request, response);
@@ -123,11 +125,9 @@ public class UserConfig extends HttpServlet {
 	}
 	private void back(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
-		
-		HttpSession session = request.getSession();
-		
+				
 		//set status
-		session.setAttribute("status", "not");
+		request.setAttribute("status", "not");
 		
 		//back request page
 		RequestDispatcher d =

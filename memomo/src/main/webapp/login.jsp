@@ -8,7 +8,7 @@ if(theAccount != null){%>
 <% } %>
  <%
 //セッションから取得
-String status = (String) session.getAttribute("status");
+String status = (String) request.getAttribute("status");
 %>
 <!DOCTYPE html>
 <html>

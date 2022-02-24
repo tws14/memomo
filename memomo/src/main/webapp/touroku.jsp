@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <%
 //セッションから取得
-String status = (String) session.getAttribute("status");
+String status = (String) request.getAttribute("status");
 %>
 <!DOCTYPE html>
 <html>
