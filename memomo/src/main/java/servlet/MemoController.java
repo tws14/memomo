@@ -59,6 +59,14 @@ public class MemoController extends HttpServlet {
 				case "ADD":
 					addMemo(request,response);
 					break;
+				case "LOAD":
+					loadMemo(request,response);
+					break;
+				case "UPDATE":
+					updateMemo(request,response);
+					break;
+				case "DELETE":
+					deleteMemo(request,response);
 			}
 		}  catch (Exception e) {
 				e.printStackTrace();
@@ -70,13 +78,30 @@ public class MemoController extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
 		try {
-			listMemos(request, response);
+			
+			//パラメータ取得
+			String theCommand2 = (String) request.getAttribute("MainCommand");
+			
+			if(theCommand2 == null) {
+				theCommand2 = "LIST2";
+			}
+			
+			switch(theCommand2) {
+						case "LIST2":
+							   listMemos(request, response);
+							   break;
+						case "ALLDELETE":
+							    alldeleteMemos(request, response);
+							   break;
+			           }
 		} catch (Exception e) {
 			 e.printStackTrace();
 		}
 		
 	}
 	
+
+
 
 	private void listMemos(HttpServletRequest request, HttpServletResponse response)
 			throws Exception  {
@@ -95,6 +120,28 @@ public class MemoController extends HttpServlet {
 				d.forward(request, response);
 		
 	}
+	
+
+	private void alldeleteMemos(HttpServletRequest request, HttpServletResponse response)
+			throws Exception {
+		
+					HttpSession session = request.getSession();
+		
+					user tempUser = (user) session.getAttribute("loginUser");
+		
+					int userid = tempUser.getId();
+					
+					memodao.alldelete(userid);
+					
+					session.invalidate();
+					
+					RequestDispatcher d =
+							request.getRequestDispatcher("/WEB-INF/jsp/deleteend.jsp");
+					d.forward(request, response);
+		
+		
+	}
+
 
 	private void writeMemo(HttpServletRequest request, HttpServletResponse response) 
 			throws Exception {
@@ -123,16 +170,15 @@ public class MemoController extends HttpServlet {
 		      
 		      int id = loginUser.getId();
 		      
-		      Memo thememo = new Memo(id,daimei,honbun);
+		      Memo theMemo = new Memo(id,daimei,honbun);
 		      
-		      memodao.add(thememo);
+		      memodao.add(theMemo);
 		      
 		      listMemos(request, response);
 		      
 		  } else {
 			  
-			  HttpSession session = request.getSession();
-			  session.setAttribute("Dstatus", "not daimei");
+			  request.setAttribute("Dstatus", "not daimei");
 			  
 			  RequestDispatcher d =
 						request.getRequestDispatcher("/WEB-INF/jsp/memoform.jsp");
@@ -141,5 +187,78 @@ public class MemoController extends HttpServlet {
 		      
 	}
 
+
+
+	private void loadMemo(HttpServletRequest request, HttpServletResponse response) 
+			throws Exception{
+		//memoidパラメータ取得
+    	request.setCharacterEncoding("UTF-8");
+		int uI = Integer.parseInt(request.getParameter("userId"));
+		String Dm = request.getParameter("Daimei");
+		String Hb = request.getParameter("Honbun");
+		int mI = Integer.parseInt(request.getParameter("memoId"));
+		
+
+		//リクエストセット
+		request.setAttribute("userid", uI);
+		request.setAttribute("daimei", Dm);
+		request.setAttribute("honbun", Hb);
+		request.setAttribute("memoid", mI);
+		
+		RequestDispatcher d =
+				request.getRequestDispatcher("/WEB-INF/jsp/update-memoform.jsp");
+		d.forward(request, response);
+		
+	
+	}
+
+
+
+	private void updateMemo(HttpServletRequest request, HttpServletResponse response)
+		   throws Exception{
+		//リクエストパラメータ取得
+		request.setCharacterEncoding("UTF-8");
+		String daimei = request.getParameter("daimei");
+		String honbun = request.getParameter("honbun");
+		int memoid = Integer.parseInt(request.getParameter("memoid"));
+		
+		//daimeiをチェック
+	      AddMemo am = new AddMemo();
+	      boolean result = am.addmemologic(daimei);
+	     
+	      if(result == true){
+	    	  
+	    	  Memo theMemo = new Memo(daimei, honbun, memoid);
+	    	  
+	    	  memodao.update(theMemo);
+	    	  
+	    	  listMemos(request,response);
+	    	  
+	      }else {
+			  
+			  request.setAttribute("Dstatus", "not daimei");
+				request.setAttribute("daimei", daimei);
+				request.setAttribute("honbun", honbun);
+				request.setAttribute("memoid", memoid);
+			  
+			  
+			  RequestDispatcher d =
+						request.getRequestDispatcher("/WEB-INF/jsp/update-memoform.jsp");
+				d.forward(request, response);
+		  }
+	}
+
+
+	private void deleteMemo(HttpServletRequest request, HttpServletResponse response) 
+	    throws Exception{
+		
+		//memoidパラメータ取得
+    	request.setCharacterEncoding("UTF-8");
+		int mI = Integer.parseInt(request.getParameter("memoId"));
+		
+		memodao.delete(mI);
+		
+		listMemos(request,response);
+	}
 
 }

@@ -14,7 +14,7 @@ import java.io.IOException;
 
 import DAO.UserDAO;
 
-@WebServlet("/UserTourokuContoroller")
+@WebServlet("/UserTourokuController")
 public class UserTourokuController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -81,22 +81,23 @@ public class UserTourokuController extends HttpServlet {
 	private void retouroku0(HttpServletRequest request, HttpServletResponse response) 
 		throws Exception {
 				
-				HttpSession session = request.getSession();
+				request.setAttribute("status", "error");
 				
-				session.setAttribute("status", "error");
-				
-				response.sendRedirect("/memomo/touroku.jsp");
-		
+
+				RequestDispatcher d =
+						request.getRequestDispatcher("/touroku.jsp");
+				d.forward(request, response);
 	}
 
 	private void retouroku(HttpServletRequest request, HttpServletResponse response)
 	    throws Exception	{
 		
-	         	HttpSession session = request.getSession();
+	         	request.setAttribute("status", "tourokuzumi");
 		
-		       session.setAttribute("status", "tourokuzumi");
-		
-		       response.sendRedirect("/memomo/touroku.jsp");
+
+				RequestDispatcher d =
+						request.getRequestDispatcher("/touroku.jsp");
+				d.forward(request, response);
 	}
 
 

@@ -35,7 +35,7 @@ public class MemoDAO {
 			Conn = DriverManager.getConnection(URL , USER , PASS);
 			
 			//sql文の準備
-			String sql = "SELECT userid, daimei, honbun FROM memo WHERE userid = ?";
+			String sql = "SELECT userid, daimei, honbun, memoid FROM memo WHERE userid = ?";
 			
 			Stmt = Conn.prepareStatement(sql);
 			
@@ -50,8 +50,9 @@ public class MemoDAO {
 				int userid = rs.getInt("userid");
 				String daimei = rs.getString("daimei");
 				String honbun = rs.getString("honbun");
+				int memoid = rs.getInt("memoid");
 				
-				Memo tempmemo = new Memo(userid, daimei, honbun);
+				Memo tempmemo = new Memo(userid, daimei, honbun, memoid);
 				
 				Memos.add(tempmemo);
 			} 
@@ -61,7 +62,7 @@ public class MemoDAO {
 			}
 	}
 	
-	public void add(Memo thememo) throws Exception{
+	public void add(Memo theMemo) throws Exception{
 		 
 		 //jdbcドライバ接続		
 		 Connection Conn = null;
@@ -77,9 +78,9 @@ public class MemoDAO {
 		 		
 	 	 Stmt = Conn.prepareStatement(sql);
 				
-		 Stmt.setInt(1, thememo.getUserid());
-		 Stmt.setString(2, thememo.getDaimei());
-		 Stmt.setString(3, thememo.getHonbun());		
+		 Stmt.setInt(1, theMemo.getUserid());
+		 Stmt.setString(2, theMemo.getDaimei());
+		 Stmt.setString(3, theMemo.getHonbun());		
 	 	 //実行
        Stmt.execute();
 		  	 
@@ -87,6 +88,90 @@ public class MemoDAO {
 		   close(Conn, Stmt, null);
 	   }
 	}
+	
+	public void update(Memo theMemo) throws Exception {
+		
+		   //JDBCドライバ接続
+		   Connection Conn = null;
+	     	PreparedStatement Stmt = null;
+	  
+	  try {
+		  
+		  Class.forName("com.mysql.cj.jdbc.Driver");
+			
+		  Conn = DriverManager.getConnection(URL , USER , PASS);
+		  
+			 //sql文の準備
+			 String sql = "UPDATE memo SET daimei=?, honbun=? WHERE memoid=?;";
+			 		
+		 	 Stmt = Conn.prepareStatement(sql);
+					
+			 Stmt.setString(1, theMemo.getDaimei());
+			 Stmt.setString(2, theMemo.getHonbun());		
+			 Stmt.setInt(3, theMemo.getMemoid());
+		 	 //実行
+	       Stmt.execute();
+			  	 
+	  }finally {
+		   close(Conn, Stmt, null);
+	   }
+		
+	}
+	
+	public void delete(int mI) throws Exception {
+		
+		     //jdbcドライバ接続		
+	         Connection Conn = null;
+	         PreparedStatement Stmt = null;
+	  
+     try{				
+	        Class.forName("com.mysql.cj.jdbc.Driver");
+	  		
+	        Conn = DriverManager.getConnection(URL , USER , PASS);
+			
+	        //sql文の準備
+	        String sql = "DELETE FROM memo WHERE memoid = ?";
+	 		
+	        Stmt = Conn.prepareStatement(sql);
+			
+	        Stmt.setInt(1, mI);
+			
+	        //実行
+	        Stmt.execute();
+	  	 
+       } finally {
+	   close(Conn, Stmt, null);
+       }
+	}
+	
+	public void alldelete(int userid) throws Exception {
+		
+			//jdbcドライバ接続		
+        	Connection Conn = null;
+        	PreparedStatement Stmt = null;
+ 
+       try{				
+    	   
+    	   Class.forName("com.mysql.cj.jdbc.Driver");
+ 		
+    	   Conn = DriverManager.getConnection(URL , USER , PASS);
+		
+    	   //sql文の準備
+    	   String sql = "DELETE FROM memo WHERE userid = ?";
+		
+    	   Stmt = Conn.prepareStatement(sql);
+		
+    	   Stmt.setInt(1, userid);
+		
+    	   //実行
+    	   Stmt.execute();
+ 	 
+       } finally {
+    	   close(Conn, Stmt, null);
+       	}
+	}
+
+
 	
 	//クローズ処理
 	private void close(Connection Conn, PreparedStatement Stmt, ResultSet rs) {

@@ -16,11 +16,12 @@ if(theAccount == null){%>
 <h1>ログインユーザー:${loginUser.username}</h1>
 <form action="UserConfig" method="post">
 <input type="hidden" name="command" value="DELETE" />
-<input type="submit" value="ユーザー削除" />
+<input type="submit" value="ユーザー削除" onclick="if(!(confirm('削除します、よろしいですか？'))) return false" />
 </form>
 
 <br/>
-<form action="UserConfig" method="get" >
+<form action="UserConfig" method="post" >
+<input type="hidden" name="command" value="BACK" />
 <input type="submit" value="メインページへ">
 </form>
 

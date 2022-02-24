@@ -8,7 +8,7 @@ if(theAccount == null){%>
 <% } %>
  <%
 //セッションから取得
-String status = (String) session.getAttribute("status");
+String status = (String) request.getAttribute("status");
 %>
 <!DOCTYPE html>
 <html>
@@ -31,7 +31,8 @@ String status = (String) session.getAttribute("status");
 </form>
 
 <br/>
-<form action="UserConfig" method="get" >
+<form action="UserConfig" method="post" >
+<input type="hidden" name="command" value="BACK" />
 <input type="submit" value="メインページへ">
 </form>
 </body>
