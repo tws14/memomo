@@ -1,48 +1,25 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="model.user" %>
-<%
-user theAccount = (user) session.getAttribute("loginUser");
-if(theAccount == null){%>
-	<jsp:forward page="/memomo/login.jsp" />	
-<% } %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>memomo-main</title>
+<title>Search Result</title>
 </head>
 <body>
-<h1>ログインユーザー:${loginUser.username}</h1>
-<form action="UserController" method="get">
-<input type="submit" value="ログアウト">
-</form>
-
+<h1>検索結果</h1>
 <br/>
-
-<form action="UserConfig" method="get" >
-<input type="submit" value="ユーザー設定">
-</form>
-<br/>
-
-<form action="MemoController" method="get">
-<input type="hidden" name="MemoCommand" value="MEMO" />
-<button type="submit">メモる</button>
-</form>
-<br/><br/>
-
-<form action="MemoController" method="get">
-<input type="hidden" name="MemoCommand" value="SEARCH" />
-<input type="text" name="word"> : <button type="submit">検索</button>
-</form>
+<c:if test="${SeachedMemos==null}">
+該当なし
+</c:if>
 <br/>
 	<table>
 			<tr>
 				<th>メモ一覧</th>	
 			</tr>
 			
-			<c:forEach var="Memo" items="${MemoList}">
+			<c:forEach var="Memo" items="${SearchedMemos}">
 			
 									<!-- 各メモへのリンク -->
 								
@@ -70,6 +47,12 @@ if(theAccount == null){%>
 	
 	
 	</table>
+
+<br/><br/>
+
+<form action="MemoController" method="get" >
+<button type="submit">メインページへ</button>
+</form>
 
 </body>
 </html>

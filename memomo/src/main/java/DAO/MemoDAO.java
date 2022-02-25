@@ -17,7 +17,7 @@ public class MemoDAO {
 	String URL = "jdbc:mysql://localhost:3306/" + databasename + propaties;
 	
 	String USER = "ta*****";
-	String PASS = "*********";
+	String PASS = "*******";
 	
 	public List<Memo> getMemos(user theUser) throws Exception {
 	       

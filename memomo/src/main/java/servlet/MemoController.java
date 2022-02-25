@@ -13,6 +13,7 @@ import model.user;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import DAO.MemoDAO;
 import DAO.UserDAO;
@@ -67,11 +68,15 @@ public class MemoController extends HttpServlet {
 					break;
 				case "DELETE":
 					deleteMemo(request,response);
+					break;
+				case "SEARCH":
+					searchMemo(request,response);
 			}
 		}  catch (Exception e) {
 				e.printStackTrace();
 	     }
 	}
+
 
 
 
@@ -260,5 +265,48 @@ public class MemoController extends HttpServlet {
 		
 		listMemos(request,response);
 	}
+	
+
+
+	private void searchMemo(HttpServletRequest request, HttpServletResponse response) 
+		throws Exception{
+		//パラメータ取得
+		String word = request.getParameter("word");
+		
+		AddMemo ad = new AddMemo();
+		boolean wordtest = ad.addmemologic(word);
+		
+	if(wordtest == true) {
+		//セッション取得
+		HttpSession session = request.getSession();
+		
+		List<Memo> tempMemos = (List<Memo>) session.getAttribute("MemoList");
+		
+		//リストの中からwordを含むものを再リスト化
+		List<Memo> SearchedMemos = tempMemos.stream()
+					.filter(m -> m.getDaimei().contains(word) || m.getHonbun().contains(word))
+					.collect(Collectors.toList());
+
+		//リクエストセット
+		request.setAttribute("SearchedMemos", SearchedMemos);
+		
+		RequestDispatcher d =
+				request.getRequestDispatcher("/WEB-INF/jsp/searched-memolist.jsp");
+		d.forward(request, response); 
+		return;
+		
+	} else {
+		
+		request.setAttribute("SearchedMemos", null);
+		
+		RequestDispatcher d =
+				request.getRequestDispatcher("/WEB-INF/jsp/searched-memolist.jsp");
+		d.forward(request, response); 
+		
+	}
+	
+		
+	}
+
 
 }
