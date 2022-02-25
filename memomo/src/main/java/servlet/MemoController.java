@@ -282,22 +282,37 @@ public class MemoController extends HttpServlet {
 		
 		List<Memo> tempMemos = (List<Memo>) session.getAttribute("MemoList");
 		
-		//リストの中からwordを含むものを再リスト化
-		List<Memo> SearchedMemos = tempMemos.stream()
+		long memocount = tempMemos.stream().filter(m -> m.getDaimei().contains(word) || m.getHonbun().contains(word)).count();
+		
+		if(memocount != 0) {
+			//リストの中からwordを含むものを再リスト化
+			List<Memo> SearchedMemos = tempMemos.stream()
 					.filter(m -> m.getDaimei().contains(word) || m.getHonbun().contains(word))
 					.collect(Collectors.toList());
 
-		//リクエストセット
-		request.setAttribute("SearchedMemos", SearchedMemos);
 		
-		RequestDispatcher d =
-				request.getRequestDispatcher("/WEB-INF/jsp/searched-memolist.jsp");
-		d.forward(request, response); 
-		return;
+			//リクエストセット
+			request.setAttribute("SearchedMemos", SearchedMemos);
+		
+			RequestDispatcher d =
+					request.getRequestDispatcher("/WEB-INF/jsp/searched-memolist.jsp");
+			d.forward(request, response); 
+			return; 
+			
+		} else {
+			
+			request.setAttribute("status", "no");
+			
+			RequestDispatcher d =
+					request.getRequestDispatcher("/WEB-INF/jsp/searched-memolist.jsp");
+			d.forward(request, response); 
+			return;
+		}
 		
 	} else {
 		
-		request.setAttribute("SearchedMemos", null);
+		
+		request.setAttribute("status", "no");
 		
 		RequestDispatcher d =
 				request.getRequestDispatcher("/WEB-INF/jsp/searched-memolist.jsp");

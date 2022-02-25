@@ -17,7 +17,7 @@ public class UserDAO {
 	String URL = "jdbc:mysql://localhost:3306/" + databasename + propaties;
 	
 	String USER = "ta*****";
-	String PASS = "*********";
+	String PASS = "*******";
 	
 	
 	//login method

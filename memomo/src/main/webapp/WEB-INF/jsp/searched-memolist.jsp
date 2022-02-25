@@ -9,16 +9,21 @@
 </head>
 <body>
 <h1>検索結果</h1>
+
 <br/>
-<c:if test="${SeachedMemos==null}">
-該当なし
-</c:if>
 <br/>
+
 	<table>
 			<tr>
 				<th>メモ一覧</th>	
 			</tr>
 			
+			<c:choose>
+			  <c:when test="${status!=null}">
+			  <td>該当なし</td>
+			  </c:when>
+			  
+			 <c:otherwise>
 			<c:forEach var="Memo" items="${SearchedMemos}">
 			
 									<!-- 各メモへのリンク -->
@@ -37,14 +42,15 @@
 						</c:url>
 			
 			<tr>
-				<td>${Memo.daimei}    
-				<a href="${templink}">メモ</a> | <a href="${deletelink}"
+			    					     <td>${Memo.daimei}    
+				                      <a href="${templink}">メモ</a> | <a href="${deletelink}"
 														onclick="if(!(confirm('削除します、よろしいですか？'))) return false"
 														>削除</a></td>
 			</tr>
 			
 			</c:forEach>
-	
+			</c:otherwise>
+			</c:choose>
 	
 	</table>
 
