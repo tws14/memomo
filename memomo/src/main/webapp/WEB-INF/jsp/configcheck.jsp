@@ -4,7 +4,7 @@
 <%
 user theAccount = (user) session.getAttribute("loginUser");
 if(theAccount == null){%>
-	<jsp:forward page="/memomo/login.jsp" />	
+	<jsp:forward page="/login.jsp" />	
 <% } %>
  <%
 //セッションから取得
