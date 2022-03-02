@@ -50,16 +50,8 @@ public class UserConfig extends HttpServlet {
 		  //パラメーターリクエスト取得
 	     String theCommand = request.getParameter("command");
 		  
-	     //null
-	     if(theCommand == null) {
-	    	 theCommand = "BACK";	    	 
-	      }
-		 
 	     //switch
 	     switch (theCommand) {
-	     	     case "BACK":
-	     	    	    backmain(request,response);
-	     	    	    break;
 	            case "CHECK":
 	            	    check(request,response);
 	            	    break;
@@ -136,13 +128,5 @@ public class UserConfig extends HttpServlet {
 		
 	}
 	
-	private void backmain(HttpServletRequest request, HttpServletResponse response) 
-	        throws Exception{
-		
-		RequestDispatcher d =
-				request.getRequestDispatcher("/WEB-INF/jsp/main.jsp");
-		d.forward(request, response);
-		
-	}
 
 }

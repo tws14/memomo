@@ -1,9 +1,12 @@
 package DAO;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,13 +14,23 @@ import model.Memo;
 import model.user;
 
 public class MemoDAO {
-
-	String databasename = "memo_mo";
-	String propaties = "?characterEncoding=UTF-8&severTimezone=JST";
-	String URL = "jdbc:mysql://localhost:3306/" + databasename + propaties;
 	
-	String USER = "ta*****";
-	String PASS = "*********";
+	private static Connection getConnection() throws URISyntaxException, SQLException{
+		
+		URI dbUri = new URI(System.getenv("CLEARDB_DATABASE_URL"));
+		
+		String username = dbUri.getUserInfo().split(":")[0];
+		String password = dbUri.getUserInfo().split(":")[1];
+		
+		String propaties = "?characterEncoding=UTF-8&severTimezone=JST";
+		
+		String dbUrl = "jdbc:mysql://" + dbUri.getHost() + dbUri.getPath() +propaties;
+		
+		return DriverManager.getConnection(dbUrl, username, password);
+		
+		
+	}
+
 	
 	public List<Memo> getMemos(user theUser) throws Exception {
 	       
@@ -32,7 +45,7 @@ public class MemoDAO {
 			
 			Class.forName("com.mysql.cj.jdbc.Driver");
 			
-			Conn = DriverManager.getConnection(URL , USER , PASS);
+			Conn = getConnection();
 			
 			//sql文の準備
 			String sql = "SELECT userid, daimei, honbun, memoid FROM memo WHERE userid = ?";
@@ -71,7 +84,7 @@ public class MemoDAO {
 	try{				
 		 Class.forName("com.mysql.cj.jdbc.Driver");
 				
-		 Conn = DriverManager.getConnection(URL , USER , PASS);
+		 Conn = getConnection();
 				
 		 //sql文の準備
 		 String sql = "INSERT INTO memo(userid, daimei, honbun) VALUES(?, ?, ?)";
@@ -99,7 +112,7 @@ public class MemoDAO {
 		  
 		  Class.forName("com.mysql.cj.jdbc.Driver");
 			
-		  Conn = DriverManager.getConnection(URL , USER , PASS);
+		  Conn = getConnection();
 		  
 			 //sql文の準備
 			 String sql = "UPDATE memo SET daimei=?, honbun=? WHERE memoid=?;";
@@ -127,7 +140,7 @@ public class MemoDAO {
      try{				
 	        Class.forName("com.mysql.cj.jdbc.Driver");
 	  		
-	        Conn = DriverManager.getConnection(URL , USER , PASS);
+	        Conn = getConnection();
 			
 	        //sql文の準備
 	        String sql = "DELETE FROM memo WHERE memoid = ?";
@@ -154,7 +167,7 @@ public class MemoDAO {
     	   
     	   Class.forName("com.mysql.cj.jdbc.Driver");
  		
-    	   Conn = DriverManager.getConnection(URL , USER , PASS);
+    	   Conn = getConnection();
 		
     	   //sql文の準備
     	   String sql = "DELETE FROM memo WHERE userid = ?";
