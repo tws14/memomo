@@ -63,7 +63,7 @@ String status = (String) request.getAttribute("status");
 					
 						<div class="input-group input-group-lg w-75 p-3">
  								 <span class="input-group-text" id="inputGroup-sizing-lg">ユーザー名</span>
- 								 <input type="text" name="username" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+ 								 <input type="text" name="username" class="form-control" aria-label="Sizing input" aria-describedby="inputGroup-sizing-lg">
 						</div>
 						
 					   </div>	
@@ -74,7 +74,7 @@ String status = (String) request.getAttribute("status");
 						
 						<div class="input-group input-group-lg w-75 p-3">
  							<span class="input-group-text" id="inputGroup-sizing-lg">パスワード</span>
- 						   <input type="password" name="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+ 						   <input type="password" name="password" class="form-control" aria-label="Sizing  input" aria-describedby="inputGroup-sizing-lg">
 						</div>
 						
 					</div>

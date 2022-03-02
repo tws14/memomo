@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ page import="model.user" %>
+<%
+user theAccount = (user) session.getAttribute("loginUser");
+if(theAccount != null){%>
+	<jsp:forward page="/WEB-INF/jsp/main.jsp" />	
+<% } %>
 <%
 //セッションから取得
 String status = (String) request.getAttribute("status");
@@ -63,7 +69,7 @@ String status = (String) request.getAttribute("status");
 					
 						<div class="input-group input-group-lg w-75 p-3">
  								 <span class="input-group-text" id="inputGroup-sizing-lg">ユーザー名</span>
- 								 <input type="text" name="username" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+ 								 <input type="text" name="username" class="form-control" aria-label="Sizing input" aria-describedby="inputGroup-sizing-lg">
 						</div>
 						
 					   </div>	
@@ -74,7 +80,7 @@ String status = (String) request.getAttribute("status");
 						
 						<div class="input-group input-group-lg w-75 p-3">
  							<span class="input-group-text" id="inputGroup-sizing-lg">パスワード</span>
- 						   <input type="password" name="password" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+ 						   <input type="password" name="password" class="form-control" aria-label="Sizing　input" aria-describedby="inputGroup-sizing-lg">
 						</div>
 						
 					</div>
@@ -87,14 +93,14 @@ String status = (String) request.getAttribute("status");
 						
 						<div class="input-group input-group-lg w-75 p-3">
  							<span class="input-group-text" id="inputGroup-sizing-lg">確認用パス</span>
- 						   <input type="password" name="repass" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg">
+ 						   <input type="password" name="repass" class="form-control" aria-label="Sizing input" aria-describedby="inputGroup-sizing-lg">
 						</div>
 						
 					</div>
 
 						
 						<div class="d-flex justify-content-center">
-							<button class="btn btn-primary" type="submit">登録</button>
+							<button class="btn btn-success" type="submit">登録</button>
 						</div>
 							
 

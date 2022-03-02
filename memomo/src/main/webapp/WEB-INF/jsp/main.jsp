@@ -12,37 +12,72 @@ if(theAccount == null){%>
 <head>
 <meta charset="UTF-8">
 <title>memomo-main</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<link rel="stylesheet" href="css/index3.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+  <meta name="theme-color" content="#fafafa">
+
+
 </head>
-<body>
-<h1>ログインユーザー:${loginUser.username}</h1>
-<form action="UserController" method="get">
-<input type="submit" value="ログアウト">
-</form>
+<body class="zentai">
+
+<jsp:include page="/WEB-INF/jsp/header.jsp"/>
+
+<br/>
+<br/>
+
+
+	<div class="container
+				border border-5 rounded-start">
+				
+				
+		<div class="d-flex justify-content-center">
+				<h1 class="display-4 d-flex justify-content-center"
+					">${loginUser.username}</h1>
+		
+
+
+			<form action="MemoController" method="get">
+			<input type="hidden" name="MemoCommand" value="MEMO" />
+			<button type="submit" class="btn btn-secondary ms-4">メモる</button>	
+			</form>
+
+		</div>
+		
+		 <div class="d-flex justify-content-center">
+ 			
+ 				<form action="MemoController" method="get" class="row">
+ 				　　　<input type="hidden" name="MemoCommand" value="SEARCH" />
+ 					
+ 					 <div class="col-auto">
+  				　　　		<input type="text" name="word" class="form-control h-50" placeholder="検索ワード">　
+  					</div>
+  					　
+  					 <div class="col-auto">
+  							<button class="btn btn-outline-secondary" type="submit" >検索</button>
+  					</div>
+  					
+ 				</form>
+ 				
+ 		</div>
+		
 
 <br/>
 
-<form action="UserConfig" method="get" >
-<input type="submit" value="ユーザー設定">
-</form>
-<br/>
+	<div class="d-flex justify-content-center">
 
-<form action="MemoController" method="get">
-<input type="hidden" name="MemoCommand" value="MEMO" />
-<button type="submit">メモる</button>
-</form>
-<br/><br/>
+		<div class="hyou d-flex justify-content-center 
+					border border-5 rounded-start w-75">
 
-<form action="MemoController" method="get">
-<input type="hidden" name="MemoCommand" value="SEARCH" />
-<input type="text" name="word"> : <button type="submit">検索</button>
-</form>
-<br/>
-	<table>
-			<tr>
-				<th>メモ一覧</th>	
-			</tr>
+		<table class="table table-striped w-75 mt-4">
+				<tr>
+					<th>メモ一覧</th>	
+				</tr>
 			
-			<c:forEach var="Memo" items="${MemoList}">
+				<c:forEach var="Memo" items="${MemoList}">
 			
 									<!-- 各メモへのリンク -->
 								
@@ -60,16 +95,34 @@ if(theAccount == null){%>
 						</c:url>
 			
 			<tr>
-				<td>${Memo.daimei}    
-				<a href="${templink}">メモ</a> | <a href="${deletelink}"
+			
+			   			
+				<td>
+				
+					${Memo.daimei}  
+					
+					<div class="d-flex justify-content-end">
+					<a href="${templink}">メモ</a> | <a href="${deletelink}"
 														onclick="if(!(confirm('削除します、よろしいですか？'))) return false"
-														>削除</a></td>
+														>削除</a>
+														
+   					</div>
+   				
+			   </td>
+			   
+			  								
+				
 			</tr>
 			
 			</c:forEach>
 	
 	
-	</table>
+			</table>
+		
+		</div>
 
+	</div>
+
+	</div>
 </body>
 </html>
