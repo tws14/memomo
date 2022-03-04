@@ -33,6 +33,14 @@
         <configuration>
           <release>11</release>
         </configuration>
+                <!--ASMの導入。（http://atmarksharp.v01.jp/posts/asm-java-bytecode-generator.html）-->
+        <dependencies>
+            <dependency>
+              <groupId>org.ow2.asm</groupId>
+              <artifactId>asm</artifactId>
+              <version>6.1</version>
+            </dependency>
+        </dependencies>
       </plugin>
       
             <plugin>
