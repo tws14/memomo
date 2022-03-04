@@ -3,7 +3,6 @@ package test;
 import javax.sql.DataSource;
 
 import DAO.UserDAO;
-import jakarta.annotation.Resource;
 import model.user;
 
 public class LoginC_Test {

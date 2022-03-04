@@ -280,6 +280,7 @@ public class MemoController extends HttpServlet {
 		//セッション取得
 		HttpSession session = request.getSession();
 		
+		@SuppressWarnings("unchecked")
 		List<Memo> tempMemos = (List<Memo>) session.getAttribute("MemoList");
 		
 		long memocount = tempMemos.stream().filter(m -> m.getDaimei().contains(word) || m.getHonbun().contains(word)).count();

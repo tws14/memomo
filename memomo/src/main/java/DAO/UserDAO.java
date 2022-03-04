@@ -10,7 +10,6 @@ import java.sql.SQLException;
 
 import javax.sql.DataSource;
 
-import jakarta.annotation.Resource;
 import model.user;
 
 public class UserDAO {
@@ -47,7 +46,7 @@ public class UserDAO {
 		Conn = getConnection();
 		
 		//sql文の準備
-		String sql = "SELECT id, username, password FROM user WHERE username = ? AND password = ?";
+		String sql = "SELECT id, username, password FROM user WHERE username = BINARY ? AND password = BINARY ?";
 		
 		Stmt = Conn.prepareStatement(sql);
 		

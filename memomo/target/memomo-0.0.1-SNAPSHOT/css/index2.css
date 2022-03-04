@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+body.zentai{
+		font-family: Georgia, "Times New Roman", Times, serif;
+       background-color: 	#CCCCFF;
+}
+
+.container{
+	padding-top: 60px;
+}
+
+.logo {
+	padding-top: 15px;
+	padding-left: 20px;
+	height: 80px;
+	background-color: #9999FF;
+	font-size: 14px;
+	width: 100%;
+}
+
+.logo  a{
+	font-size: 30px;
+	color: white;
+}
+
+
+h2{		
+       font-family: Courier;
+		background-color: #9999FF;
+
+}
+
+.btn{
+	margin-top:20px;
+	margin-bottom:20px;
+	 width: 120px;
+}
