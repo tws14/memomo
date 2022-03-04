@@ -57,7 +57,7 @@ String status = (String) request.getAttribute("status");
 
 			<div>
 		
-					<form action="<%= request.getContextPath() %>/UserController" method="post"/>
+					<form action="${pageContext.request.contextPath}/UserController" method="post"/>
 					
 					  <div class="d-flex justify-content-center">
 					

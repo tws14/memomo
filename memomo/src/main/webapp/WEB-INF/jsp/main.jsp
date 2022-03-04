@@ -40,7 +40,7 @@ if(theAccount == null){%>
 		
 
 
-			<form action="<%= request.getContextPath() %>/MemoController" method="get">
+			<form action="${pageContext.request.contextPath}/MemoController" method="get">
 			<input type="hidden" name="MemoCommand" value="MEMO" />
 			<button type="submit" class="btn btn-secondary ms-4">メモる</button>	
 			</form>
@@ -49,7 +49,7 @@ if(theAccount == null){%>
 		
 		 <div class="d-flex justify-content-center">
  			
- 				<form action="<%= request.getContextPath() %>/MemoController" method="get" class="row">
+ 				<form action="${pageContext.request.contextPath}/MemoController" method="get" class="row">
  				　　　<input type="hidden" name="MemoCommand" value="SEARCH" />
  					
  					 <div class="col-auto">
@@ -81,7 +81,7 @@ if(theAccount == null){%>
 			
 									<!-- 各メモへのリンク -->
 								
-						<c:url var="templink" value="<%= request.getContextPath() %>/MemoController">
+						<c:url var="templink" value="${pageContext.request.contextPath}/MemoController">
 							<c:param name="MemoCommand" value="LOAD" />
 							<c:param name="userId" value="${Memo.userid}" />
 							<c:param name="Daimei" value="${Memo.daimei}" />
@@ -89,7 +89,7 @@ if(theAccount == null){%>
 							<c:param name="memoId" value="${Memo.memoid}" />
 						</c:url>
 						
-						<c:url var="deletelink" value="<%= request.getContextPath() %>/MemoController">
+						<c:url var="deletelink" value="${pageContext.request.contextPath}/MemoController">
 							<c:param name="MemoCommand" value="DELETE" />
 							<c:param name="memoId" value="${Memo.memoid}" />
 						</c:url>

@@ -57,7 +57,7 @@ String status = (String) request.getAttribute("Dstatus");
  		
  				
  				
-				<form action="<%= request.getContextPath() %>/MemoController" method="get"/>
+				<form action="${pageContext.request.contextPath}/MemoController" method="get"/>
 					
 						<input type="hidden" name="MemoCommand" value="UPDATE"/>
 						<input type="hidden" name="memoid" value="${memoid}"/>
