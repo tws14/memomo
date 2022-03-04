@@ -63,7 +63,7 @@ String status = (String) request.getAttribute("status");
 
 			<div>
 		
-					<form action="${pageContext.request.contextPath}/UserTourokuController" method="post"/>
+					<form action="./UserTourokuController" method="post"/>
 					
 					  <div class="d-flex justify-content-center">
 					
