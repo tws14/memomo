@@ -9,15 +9,15 @@
   	<div class="navlist">
  	 <ul class="nav justify-content-end">
  	 
- 	 					<c:url var="logoutlink" value="UserController">
+ 	 					<c:url var="logoutlink" value="/UserController">
 						
 						</c:url>
 						
-						<c:url var="configlink" value="UserConfig">
+						<c:url var="configlink" value="/UserConfig">
 
 						</c:url>
 						
-						<c:url var="backlink" value="MemoController">
+						<c:url var="backlink" value="/MemoController">
 		
 						</c:url>
  	 		

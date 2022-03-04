@@ -61,7 +61,7 @@ if(theAccount == null){%>
 			
 									<!-- 各メモへのリンク -->
 								
-						<c:url var="templink" value="MemoController">
+						<c:url var="templink" value="/MemoController">
 							<c:param name="MemoCommand" value="LOAD" />
 							<c:param name="userId" value="${Memo.userid}" />
 							<c:param name="Daimei" value="${Memo.daimei}" />
@@ -69,7 +69,7 @@ if(theAccount == null){%>
 							<c:param name="memoId" value="${Memo.memoid}" />
 						</c:url>
 						
-						<c:url var="deletelink" value="MemoController">
+						<c:url var="deletelink" value="/MemoController">
 							<c:param name="MemoCommand" value="DELETE" />
 							<c:param name="memoId" value="${Memo.memoid}" />
 						</c:url>

@@ -58,7 +58,7 @@ String status = (String) request.getAttribute("Dstatus");
  		
  				
  				
-				<form action="MemoController" method="get"/>
+				<form action="/MemoController" method="get"/>
 						<input type="hidden" name="MemoCommand" value="ADD" />
 
 				<div class="mb-2">
