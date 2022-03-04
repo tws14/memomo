@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 import DAO.MemoDAO;
 import DAO.UserDAO;
 
-@WebServlet("/MemoController")
+
 public class MemoController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 		

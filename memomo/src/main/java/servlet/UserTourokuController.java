@@ -14,7 +14,7 @@ import java.io.IOException;
 
 import DAO.UserDAO;
 
-@WebServlet("/UserTourokuController")
+
 public class UserTourokuController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

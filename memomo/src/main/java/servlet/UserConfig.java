@@ -14,7 +14,7 @@ import java.io.IOException;
 
 import DAO.UserDAO;
 
-@WebServlet("/UserConfig")
+
 public class UserConfig extends HttpServlet {
 	private static final long serialVersionUID = 1L;
         
