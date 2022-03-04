@@ -52,7 +52,7 @@ String status = (String) request.getAttribute("status");
 
 			<div>
 		
-					<form action="./UserConfig" method="post"/>
+					<form action="<%= request.getContextPath() %>/UserConfig" method="post"/>
 							    <input type="hidden" name="command" value="CHECK" />
 							
 					  <div class="d-flex justify-content-center">

@@ -61,7 +61,7 @@ if(theAccount == null){%>
 			
 									<!-- 各メモへのリンク -->
 								
-						<c:url var="templink" value="./MemoController">
+						<c:url var="templink" value="<%= request.getContextPath() %>/MemoController">
 							<c:param name="MemoCommand" value="LOAD" />
 							<c:param name="userId" value="${Memo.userid}" />
 							<c:param name="Daimei" value="${Memo.daimei}" />

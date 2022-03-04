@@ -43,7 +43,7 @@ if(theAccount == null){%>
 		<br/>
 		
 		<div class="d-flex justify-content-center">
-				<form action="./UserConfig" method="post">
+				<form action="<%= request.getContextPath() %>/UserConfig" method="post">
 						<input type="hidden" name="command" value="DELETE" />
 						<button type="submit" class="btn btn-danger" onclick="if(!(confirm('削除します、よろしいですか？'))) return false" >ユーザー削除</button>
 				</form>
