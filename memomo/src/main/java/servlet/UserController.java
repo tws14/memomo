@@ -38,7 +38,7 @@ public class UserController extends HttpServlet {
 		HttpSession session = request.getSession();
 		session.invalidate();
 		
-		response.sendRedirect("/memomo/login.jsp");
+		response.sendRedirect("/login.jsp");
 	}
 
 
