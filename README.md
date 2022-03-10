@@ -2,7 +2,7 @@
 
 登録、ログインしたあとに使える検索機能付きの個人メモ<br>
 Java,Servlet,JSPの学習の際作成しました。<br>
-<br>
+
 ### URL
 https://fierce-sierra-71324.herokuapp.com/
 
