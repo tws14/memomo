@@ -14,14 +14,14 @@ https://fierce-sierra-71324.herokuapp.com/
 * 言語
     - Java 11, html/css, Javascript
 * フレームワーク/ライブラリ
-    - bootstrap, JSTL
+    - Bootstrap, JSTL
 * その他ツール
     - heroku, Maven3.6.3, Tomcat9.0.59
 ## 機能
 * ユーザー全般
-    -ログイン, ログアウト, 会員登録, 削除
+    - ログイン, ログアウト, 会員登録, 削除
 * メモ
-    -一覧表示
-    -投稿, 削除, 編集
-    -検索, 検索結果一覧表示
+    - 一覧表示
+    - 投稿, 削除, 編集
+    - 検索, 検索結果一覧表示
  
