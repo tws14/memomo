@@ -12,7 +12,7 @@ https://fierce-sierra-71324.herokuapp.com/
 
 ## 使用技術
 * 言語
-    - Java 11, html/css, Javascript
+    - Java 11, html/css, JavaScript
 * フレームワーク/ライブラリ
     - Bootstrap, JSTL
 * その他ツール
